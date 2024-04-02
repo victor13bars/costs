@@ -1,7 +1,10 @@
+import { useStore } from "effector-react";
 import { useTheme } from "../../hooks";
+import { $username } from "../../context/auth";
 
 export const Header = () => {
   const { switchTheme, theme } = useTheme();
+  const username = useStore($username);
 
   return (
     <header
@@ -11,6 +14,7 @@ export const Header = () => {
     >
       <div className="container">
         <h1 style={{ color: "white" }}>Costs App</h1>
+        {username.length ? <h2 style={{ color: "white" }}>{username}</h2> : ""}
         <button
           onClick={switchTheme}
           className={`btn btn-theme btn-${theme === "dark" ? "light" : "dark"}`}
