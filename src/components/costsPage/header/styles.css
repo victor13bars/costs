@@ -1,0 +1,13 @@
+form {
+  align-items: flex-end;
+}
+
+.form-item {
+  margin-right: 10px;
+}
+
+.add-btn {
+  position: relative;
+  min-width: 96px;
+  min-height: 38px;
+}

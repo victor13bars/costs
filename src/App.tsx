@@ -11,6 +11,7 @@ import { useStore } from "effector-react";
 import { $auth } from "./context/auth";
 import { $alert } from "./context/alert";
 import { Alert } from "./components/alert/Alert";
+import { Costs } from "./components/costsPage/Costs";
 
 export const App = () => {
   const isLoggedIn = useStore($auth);
@@ -19,7 +20,7 @@ export const App = () => {
   return (
     <div className="App">
       <Header />
-      {alert.alertText && <Alert props={alert}/>}
+      {alert.alertText && <Alert props={alert} />}
       <Router>
         <Routes>
           <Route
@@ -50,7 +51,7 @@ export const App = () => {
           />
           <Route
             path="/costs"
-            element={isLoggedIn ? <h1>Costs</h1> : <Navigate to={"login"} />}
+            element={isLoggedIn ? <Costs /> : <Navigate to={"login"} />}
           />
         </Routes>
       </Router>
