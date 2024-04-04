@@ -24,16 +24,34 @@ export interface ICost {
   text: string;
   price: number;
   date: Date | string;
-  _id: number | string;
+  _id?: number | string;
 }
 
-export interface ICreateCost {
+export interface IBaseArgs {
   url: string;
+  token: string;
+}
+
+export interface IDeleteCost extends IBaseArgs {
+  id: string | number;
+}
+
+export interface ICreateCost extends IBaseArgs {
   cost: ICost;
-  token: string;
 }
 
-export interface IGetCosts {
-  url: string;
-  token: string;
+export interface IRefreshToken extends IBaseArgs {
+  username: string;
+}
+
+export interface IHandleAxiosErrorPayload {
+  type: string;
+  createCost?: Partial<ICreateCost>;
+  getCosts?: Partial<IBaseArgs>;
+  deleteCost?: Partial<IDeleteCost>;
+}
+
+export interface ICostsItemProps {
+  cost: ICost;
+  index: number;
 }

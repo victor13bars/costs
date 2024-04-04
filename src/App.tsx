@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { Header } from "./components/header/Header";
 import { AuthPage } from "./components/authPage/AuthPage";
 import {
@@ -8,14 +8,25 @@ import {
   Navigate,
 } from "react-router-dom";
 import { useStore } from "effector-react";
-import { $auth } from "./context/auth";
+import { $auth, setAuth, setUsername } from "./context/auth";
 import { $alert } from "./context/alert";
 import { Alert } from "./components/alert/Alert";
 import { Costs } from "./components/costsPage/Costs";
+import { getAuthDataFromLS, removeUser } from "./utils/auth";
 
 export const App = () => {
   const isLoggedIn = useStore($auth);
   const alert = useStore($alert);
+
+  useEffect(() => {
+    const auth = getAuthDataFromLS();
+    if(!auth || !auth.access_token || !auth.refresh_token){
+      removeUser();
+    }else{
+      setAuth(true)
+      setUsername(auth.username);
+    }
+  }, []);
 
   return (
     <div className="App">
